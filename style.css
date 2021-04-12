@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#canvas {
+  display: block;
+  background: red;
+}
+
+.actions {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.actions > #brush {
+  display: none;
+}
+
+.actions > #eraser {
+  display: block;
+}
+
+.actions.checked > #brush {
+  display:inline-block;
+}
+.actions.checked > #eraser {
+  display:none;
+}
