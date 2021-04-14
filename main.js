@@ -1,9 +1,13 @@
 let canvas = document.getElementById('canvas')
 let eraser = document.getElementById('eraser')
 let brush = document.getElementById('brush')
-let actions = document.getElementById('actions')
+let bucket = document.getElementById('bucket')
+let red = document.getElementById('red')
+let blue = document.getElementById('blue')
+let green = document.getElementById('green')
 
 let context = canvas.getContext('2d')
+
 
 let autoSetCanvas = (canvas) => {
   let setCanvasSize = () => {
@@ -20,11 +24,39 @@ let listenToMouse = (canvas) => {
   let isTouchDevice = 'ontouchstart' in document.documentElement
   let eraserToggle = false
 
+  brush.onclick = () => {
+    eraserToggle = false
+    brush.classList.add('active')
+    eraser.classList.remove('active')
+  }
+  eraser.onclick = () => {
+    eraserToggle = true
+    eraser.classList.add('active')
+    brush.classList.remove('active')
+  }
+  red.onclick = () => {
+    red.classList.add('active')
+    blue.classList.remove('active')
+    green.classList.remove('active')
+    context.strokeStyle='#ed1c24'
+  }
+  blue.onclick = () => {
+    blue.classList.add('active')
+    red.classList.remove('active')
+    green.classList.remove('active')
+    context.strokeStyle='#4bb0dc'
+  }
+  green.onclick = () => {
+    green.classList.add('active')
+    blue.classList.remove('active')
+    red.classList.remove('active')
+    context.strokeStyle='#1fb288'
+    }
   let lastPainting = []
 
-  context.fillStyle = 'black'
   context.lineWidth = 10
   context.lineCap = "round"
+
 
   let startDrawing = (x, y) => {
     if (eraserToggle) {
@@ -57,6 +89,13 @@ let listenToMouse = (canvas) => {
       let y = e.touches[0].clientY
       drawing(x, y)
     }
+    bucket.ontouchstart = () => {
+      bucket.classList.add('checked')
+    }
+
+    bucket.ontouchend = () => {
+      bucket.classList.remove('checked')
+    }
   } else {
     canvas.onmousedown = (e) => {
       let x = e.clientX
@@ -71,6 +110,14 @@ let listenToMouse = (canvas) => {
     canvas.onmouseup = () => {
       functionToggle = false
     }
+
+    bucket.onmousedown = () => {
+      bucket.classList.add('checked')
+    }
+
+    bucket.onmouseup = () => {
+      bucket.classList.remove('checked')
+    }
   }
 
   let drawLine = (x1, y1, x2, y2) => {
@@ -81,14 +128,7 @@ let listenToMouse = (canvas) => {
 
   }
 
-  eraser.onclick = () => {
-    eraserToggle = true
-    actions.className = 'actions checked'
-  }
-  brush.onclick = () => {
-    eraserToggle = false
-    actions.className = 'actions'
-  }
+
 }
 listenToMouse(canvas)
 
