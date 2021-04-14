@@ -1,3 +1,5 @@
+
+
 let canvas = document.getElementById('canvas')
 let eraser = document.getElementById('eraser')
 let brush = document.getElementById('brush')

@@ -12,6 +12,19 @@ body {
   overflow: hidden
 }
 
+#canvas {
+  postion: fixed;
+  top: 0;
+  left: 0;
+}
+
+svg {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .icon {
   width: 1em;
   height: 1em;
@@ -37,6 +50,7 @@ body {
   height: 1.5em;
   margin: 0 10px;
   transition: all 0.3s;
+  foucs: none;
 }
 
 .actions svg.active {
