@@ -8,6 +8,10 @@ ul, ol {
   list-style: none;
 }
 
+body {
+  overflow: hidden
+}
+
 .icon {
   width: 1em;
   height: 1em;
@@ -51,24 +55,29 @@ ul, ol {
   top: 20px;
   right: 30px;
 }
-.colors>li{
-  width:20px;
-  height:20px;
-  box-shadow: 0 0 3px rgba(0,0,0,0.25);
+
+.colors > li {
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
   border-radius: 50%;
-  margin:25px 0;
+  margin: 25px 0;
   transition: all 0.3s;
 }
-.colors>li.active{
-  box-shadow: 0 0 3px rgba(0,0,0,0.95);
+
+.colors > li.active {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.95);
   transform: scale(1.5);
 }
-.colors>li.red{
+
+.colors > li.red {
   background: #ed1c24;
 }
-.colors>li.green{
+
+.colors > li.green {
   background: #1fb288;
 }
-.colors>li.blue{
+
+.colors > li.blue {
   background: #4bb0dc;
 }
