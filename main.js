@@ -1,22 +1,26 @@
 let canvas = document.getElementById('canvas')
 let eraser = document.getElementById('eraser')
 let brush = document.getElementById('brush')
-let bucket = document.getElementById('bucket')
+let clear = document.getElementById('clear')
 let red = document.getElementById('red')
 let blue = document.getElementById('blue')
 let green = document.getElementById('green')
+let thick = document.getElementById('thick')
+let thin = document.getElementById('thin')
 
 let context = canvas.getContext('2d')
-
+let width = document.documentElement.clientWidth
+let height = document.documentElement.clientHeight
 
 let autoSetCanvas = (canvas) => {
   let setCanvasSize = () => {
-    canvas.width = document.documentElement.clientWidth
-    canvas.height = document.documentElement.clientHeight
+    canvas.width = width
+    canvas.height = height
   }
   setCanvasSize()
 }
 autoSetCanvas(canvas)
+let lineWidth = 10
 
 
 let listenToMouse = (canvas) => {
@@ -38,23 +42,35 @@ let listenToMouse = (canvas) => {
     red.classList.add('active')
     blue.classList.remove('active')
     green.classList.remove('active')
-    context.strokeStyle='#ed1c24'
+    context.strokeStyle = '#ed1c24'
   }
   blue.onclick = () => {
     blue.classList.add('active')
     red.classList.remove('active')
     green.classList.remove('active')
-    context.strokeStyle='#4bb0dc'
+    context.strokeStyle = '#4bb0dc'
   }
   green.onclick = () => {
     green.classList.add('active')
     blue.classList.remove('active')
     red.classList.remove('active')
-    context.strokeStyle='#1fb288'
-    }
+    context.strokeStyle = '#1fb288'
+  }
+  thin.onclick = () => {
+    lineWidth = 10
+    thin.classList.add('active')
+    thick.classList.remove('active')
+  }
+  thick.onclick = () => {
+    lineWidth = 20
+    thick.classList.add('active')
+    thin.classList.remove('active')
+  }
+  clear.onclick = () => {
+    context.clearRect(0, 0, width,height)
+  }
   let lastPainting = []
 
-  context.lineWidth = 10
   context.lineCap = "round"
 
 
@@ -89,12 +105,12 @@ let listenToMouse = (canvas) => {
       let y = e.touches[0].clientY
       drawing(x, y)
     }
-    bucket.ontouchstart = () => {
-      bucket.classList.add('checked')
+    clear.ontouchstart = () => {
+      clear.classList.add('checked')
     }
 
-    bucket.ontouchend = () => {
-      bucket.classList.remove('checked')
+    clear.ontouchend = () => {
+      clear.classList.remove('checked')
     }
   } else {
     canvas.onmousedown = (e) => {
@@ -111,24 +127,23 @@ let listenToMouse = (canvas) => {
       functionToggle = false
     }
 
-    bucket.onmousedown = () => {
-      bucket.classList.add('checked')
+    clear.onmousedown = () => {
+      clear.classList.add('checked')
     }
 
-    bucket.onmouseup = () => {
-      bucket.classList.remove('checked')
+    clear.onmouseup = () => {
+      clear.classList.remove('checked')
     }
   }
+  context.strokeStyle = '#ed1c24'
 
   let drawLine = (x1, y1, x2, y2) => {
     context.beginPath();
     context.moveTo(x1, y1);
     context.lineTo(x2, y2);
+    context.lineWidth = lineWidth
     context.stroke();
-
   }
-
-
 }
 listenToMouse(canvas)
 
